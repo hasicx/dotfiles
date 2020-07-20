@@ -115,3 +115,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+eval "$(dircolors ~/.dircolors)"
+alias ls='ls -F --color=auto'
