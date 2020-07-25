@@ -88,9 +88,12 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls -alF --color=always'
+alias l='\ls -F --color=always'    #  l: ls
+alias la='\ls -aF --color=always'  # la: ls -a
+alias ll='\ls -lF --color=always' # ll: ls -l
+#alias la='ls -A --color=always'
+#alias l='ls -CF --color=always'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -117,4 +120,5 @@ if ! shopt -oq posix; then
 fi
 
 eval "$(dircolors ~/.dircolors)"
-alias ls='ls -F --color=auto'
+
+PS1="\u@: \w$ "
