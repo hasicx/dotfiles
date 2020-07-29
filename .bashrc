@@ -119,6 +119,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+#Directory colors for ls.
 eval "$(dircolors ~/.dircolors)"
 
+#Custom prompt.
 PS1="\u@: \w$ "
+
+#bash vi editing mode (set to enable).
+set -o vi
