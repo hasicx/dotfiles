@@ -1,0 +1,8 @@
+[user]
+	email = hasic@student.chalmers.se
+    name = Adel Hasic
+    username = hasicx
+[core]
+	editor = vim
+[color]
+	ui = true
