@@ -92,8 +92,6 @@ alias ls='ls -alF --color=always'
 alias l='\ls -F --color=always'    #  l: ls
 alias la='\ls -aF --color=always'  # la: ls -a
 alias ll='\ls -lF --color=always' # ll: ls -l
-#alias la='ls -A --color=always'
-#alias l='ls -CF --color=always'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
