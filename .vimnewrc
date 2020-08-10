@@ -1,6 +1,10 @@
 " =============================================================================
 "  EDITOR SETTINGS
 " =============================================================================
+" Misc.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible            " Disable Vi compatibilty
+
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number          " Absolute line numbers on
@@ -34,14 +38,14 @@ set expandtab       " Expand TABs to spaces.
 syntax on           " Syntax highlighting
 colorscheme tender  " Current color scheme
 
-" Misc.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible            " Disable Vi compatibilty
-
 " Searching/highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight matching parentheses (), square brackets [] and curly brackets {}.
 set showmatch       "Highlight matching pairs of (), [], {}. 
+
+" Highlight long lines
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 " =============================================================================
 "   PLUGINS
@@ -64,9 +68,8 @@ call plug#end()
 
 " vim-tex
 let g:tex_flavor='latex'
-let g:vimtex_view_general_viewer='sumatraPDF'
-let g:vimtex_view_general_options='-reuse-instance @pdf'
-let g:vimtex_view_general_options_latexmk='-reuse-instance'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 

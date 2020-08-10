@@ -125,3 +125,6 @@ PS1="\u@: \w$ "
 
 #bash vi editing mode (set to enable).
 set -o vi
+
+# Using WSL 2? Then use this instead.
+export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
