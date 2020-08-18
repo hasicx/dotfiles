@@ -40,13 +40,30 @@ colorscheme tender  " Current color scheme
 
 " Searching/highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set showmatch       "Highlight matching pairs of (), [], {}. 
+set incsearch       " Highlight while searching with / or ?.
+set showmatch       " Highlight matching pairs of (), [], {}. 
+set hlsearch        " Keep matches highlighted.
+" Escape key after /?-searching removes highlight, see REMAPS section.
 
 " Highlight long lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
+" =============================================================================
+"   MAPS/REMAPS/HOTKEYS
+" =============================================================================
+" Clear 'last search pattern' register using escape after /?-searching to
+" remove search highlight.
+nnoremap <Esc> :noh<Return><Esc>
+
+" Global and local map leader maps. Local leader prefixes mappings which only
+" work for a certain file type, e.g. for mappings that only take effect for
+" Python files. 
+let mapleader = ""          " Default leader key (backslash, '\').
+let maplocalleader = "-"    " Local leader key.
+set pastetoggle=<leader>p
+ 
 " =============================================================================
 "   PLUGINS
 " =============================================================================
@@ -66,11 +83,16 @@ call plug#end()
 "   PLUGIN CONFIG
 " =============================================================================
 
-" vim-tex
+" lerax/vim-tex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-" vim-markdown
+" plasticboy/vim-markdown
+autocmd FileType markdown normal zR
+
+" iamcco/markdown-preview
+let g:mkdp_refresh_show=1
+let g:mkdp_markdown_css='/home/hasic_/dotfiles/github-markdown.css'
