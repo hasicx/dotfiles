@@ -2,3 +2,5 @@
 .vim/UltiSnips/
 .vim/autoload/
 .vim/plugged/
+.vim/pack/
+.vim/.netrwhist
