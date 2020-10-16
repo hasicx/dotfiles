@@ -1,0 +1,4 @@
+.tmux/*
+.vim/UltiSnips/
+.vim/autoload/
+.vim/plugged/
