@@ -4,14 +4,19 @@
 " Misc.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible            " Disable Vi compatibilty
+set clipboard=exclude:.*
 
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number          " Absolute line numbers on
+"set relativenumber  " Relative line numbers on
 set laststatus=2    " Status line at bottom
 set showcmd         " Show current command in status line
 set cursorline      " Highlight line of cursor
 set linebreak       " Wrap lines (i.e. do not continue off-screen).
+set tw=80           " Text width = 80 characters
+set splitbelow      " Place new panes below current pane for horiz-split
+set splitright      " Place new panes to the right of current pane (v-split)
 
 " Spaces & Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -38,6 +43,10 @@ set expandtab       " Expand TABs to spaces.
 syntax on           " Syntax highlighting
 colorscheme tender  " Current color scheme
 
+" Movement
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nostartofline   " Do not go to first no-blank character when jumping line
+
 " Searching/highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch       " Highlight while searching with / or ?.
@@ -48,29 +57,42 @@ set hlsearch        " Keep matches highlighted.
 " Highlight long lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%82v', 100)
 
 " =============================================================================
-"   MAPS/REMAPS/HOTKEYS
+"   maps/remaps/hotkeys
 " =============================================================================
 " Clear 'last search pattern' register using escape after /?-searching to
 " remove search highlight.
-nnoremap <Esc> :noh<Return><Esc>
+nmap <silent> <leader><Esc> :noh<Return><Esc>
+
+" Quicker search and replace
+" noremap ;; :%s:::g<Left><Left><Left>
+" noremap ;' :%s:::cg<Left><Left><Left><Left>
+
+" Prevent x from overriding what's in the clipboard.
+"noremap x "_x
+"noremap X "_x
 
 " Global and local map leader maps. Local leader prefixes mappings which only
 " work for a certain file type, e.g. for mappings that only take effect for
 " Python files. 
 let mapleader = ""          " Default leader key (backslash, '\').
 let maplocalleader = "-"    " Local leader key.
-set pastetoggle=<leader>p
- 
+set pastetoggle=<leader>pt
+
 " =============================================================================
-"   PLUGINS
+"   plugins
 " =============================================================================
-" Plugings will be downloaded under the specified directory.
+" Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'junegunn/vim-plug'
 Plug 'lervag/vimtex'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -83,11 +105,18 @@ call plug#end()
 "   PLUGIN CONFIG
 " =============================================================================
 
+" Snippets (trigger configuration)
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsListSnippets="c-tab"
+
 " lerax/vim-tex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
+set conceallevel=2
 let g:tex_conceal='abdmg'
 
 " plasticboy/vim-markdown
@@ -96,3 +125,37 @@ autocmd FileType markdown normal zR
 " iamcco/markdown-preview
 let g:mkdp_refresh_show=1
 let g:mkdp_markdown_css='/home/hasic_/dotfiles/github-markdown.css'
+
+" terryma/vim-smooth-scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" easymotion/vim-easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1 " Turn on case-insensitive feature
+" hjkl for leftward/downward/upward/rightward movement
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" char search inline
+map <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" move to word
+map <Leader>w <Plug>(easymotion-bd-w)
+map <Leader>W <Plug>(easymotion-bd-W)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+" 2-char search
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Search
+map  <Leader>/ <Plug>(easymotion-sn)
+omap <Leader>/ <Plug>(easymotion-tn)
+" Repeat
+map <Leader>. <Plug>(easymotion-repeat)
+
+
+
+
