@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =7
-let g:netrw_dirhist_7='/mnt/e/Data/course-docs/lsp530__fiction_for_engineers/session-notes'
-let g:netrw_dirhist_6='/mnt/e/Data/course-docs/ffr135__artificial_neural_networks/h1_p2__submission'
-let g:netrw_dirhist_5='/mnt/e/Data/course-docs/ffr135__artificial_neural_networks'
-let g:netrw_dirhist_4='/mnt/e/Data/course-docs/ffr135__artificial_neural_networks/exercise_class'
-let g:netrw_dirhist_3='/home/hasic_/main'
-let g:netrw_dirhist_2='/home/hasic_/main/docs'
-let g:netrw_dirhist_1='/home/hasic_/hpc/a1/files/t1.c'
