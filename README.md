@@ -1,2 +1,10 @@
 # dotfiles
-Run symlink.sh to generate soft links (symlinks) in $HOME (~) to .../dotfiles/.* (i.e. to the absolute paths of the dot-files in dotfiles/)
+
+Link config files from home dir.
+
+## Installing
+
+Run symlink.sh after confirming username and path. 
+```
+$ sh symlink.sh
+```

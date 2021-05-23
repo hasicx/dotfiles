@@ -1,10 +1,11 @@
+" vi: ft=vim
 " =============================================================================
 "  EDITOR SETTINGS
 " =============================================================================
 " Misc.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible            " Disable Vi compatibilty
-set clipboard=exclude:.*
+"set clipboard=exclude:.*
 
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -17,6 +18,8 @@ set linebreak       " Wrap lines (i.e. do not continue off-screen).
 set tw=80           " Text width = 80 characters
 set splitbelow      " Place new panes below current pane for horiz-split
 set splitright      " Place new panes to the right of current pane (v-split)
+set foldcolumn=4    " Add column for fold monitoring (width 4)
+
 
 " Spaces & Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -27,21 +30,22 @@ if has("autocmd")
 
     " Use actual tab chars in Makefiles.
     autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+    autocmd FileType markdown set shiftwidth=2 softtabstop=2
 endif " 
 
 " For everything else, use a tab width of 4 space chars.
-set tabstop=8       " The width of a TAB is set to 4.
+set tabstop=8       " The width of a TAB is set to 8.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
-                    " a width of 4.
+                    " a width of 8.
 set shiftwidth=4    " Indents will have a width of 4 (using > and <)
 set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab       " Expand TABs to spaces.
 
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on           " Syntax highlighting
-colorscheme tender  " Current color scheme
+syntax on               " Syntax highlighting
+colorscheme 256_noir    " Current color scheme
 
 " Movement
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -51,15 +55,18 @@ set nostartofline   " Do not go to first no-blank character when jumping line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch       " Highlight while searching with / or ?.
 set showmatch       " Highlight matching pairs of (), [], {}. 
-set hlsearch        " Keep matches highlighted.
+set hlsearch        " Keep search matches highlighted.
+set matchtime=10    " Show matching paren for 'matchtime' seconds.
 " Escape key after /?-searching removes highlight, see REMAPS section.
 
 " Highlight long lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
-
-" =============================================================================
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
+hi OverLength ctermbg=magenta  guibg=darkred
+"call matchadd('OverLength', '\%>80v.\+')
+autocmd VimEnter,WinEnter * match OverLength /\%>80v.\+/
+" ===============================================================================
 "   maps/remaps/hotkeys
 " =============================================================================
 " Clear 'last search pattern' register using escape after /?-searching to
@@ -88,15 +95,20 @@ set pastetoggle=<leader>pt
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-smooth-scroll'
-Plug 'junegunn/vim-plug'
-Plug 'lervag/vimtex'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() },
+    \'for': ['markdown', 'vim-plug']}
 Plug 'godlygeek/tabular'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'junegunn/vim-plug'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'honza/vim-snippets'
+Plug 'lervag/vimtex'
+
+" Reload vimrc and execute :PlugInstall to install any uninstalled plugins in
+" the list.
 
 "List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -155,7 +167,4 @@ map  <Leader>/ <Plug>(easymotion-sn)
 omap <Leader>/ <Plug>(easymotion-tn)
 " Repeat
 map <Leader>. <Plug>(easymotion-repeat)
-
-
-
 

@@ -87,11 +87,11 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ls='ls -alF --color=always'
+# ls alternatives:
+alias ls='ls -lhgAF --color=always'   # All\{., ..}, long, classify (add *,@ etc)
 alias l='\ls -F --color=always'    #  l: ls
-alias la='\ls -aF --color=always'  # la: ls -a
-alias ll='\ls -lF --color=always' # ll: ls -l
+alias la='\ls -ahlF --color=always'  # la: ls -a
+alias ll='\ls -lhgF --color=always' # ll: ls -l
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -144,3 +144,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Customize READLINE settings so that tab-completion (at terminal input) of
+# symbolic links to directories appends a slash '/' to the name of the symbolic
+# link (as is the case for ordinary directories).
+# E.g.: .../symLi+<Tab>  -->> .../symLinkToDir/ as opposed to the default for
+# symlinks (.../symLinkToDir), which requires an additional tab to include the
+# final slash.
+bind 'set mark-symlinked-directories on'
